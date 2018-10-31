@@ -17,7 +17,7 @@
         right: 10px;
         border-radius: 3px;
         width: 120px;
-        border: 1px solid rgba(0,0,0,0.4);
+        
         font-family: 'Open Sans', sans-serif;
     }
 
@@ -29,7 +29,7 @@
         padding: 0;
         padding: 10px;
         text-decoration: none;
-        border-bottom: 1px solid rgba(0,0,0,0.25);
+        
         text-align: center;
     }
 
@@ -39,16 +39,21 @@
 
     #menu a:hover {
         background-color: #f8f8f8;
-        color: #404040;
+        color: #141010;
     }
 
     #menu a.active {
-        background-color: #3887be;
+        background-color: #140D2F;
         color: #ffffff;
     }
 
     #menu a.active:hover {
-        background: #3074a4;
+        background: #2C2261;
+    }
+
+    .mapboxgl-popup {
+        max-width: 400px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     }
     </style>
 </head>
@@ -64,7 +69,7 @@ var map = new mapboxgl.Map({
 zoom: 12.0   // starting zoom
 });
 
-var toggleableLayerIds = [ 'strava_all', 'strava_winter' ];
+var toggleableLayerIds = [ 'strava_all', 'strava_winter', 'amenity' ];
 
 for (var i = 0; i < toggleableLayerIds.length; i++) {
     var id = toggleableLayerIds[i];
@@ -93,6 +98,23 @@ for (var i = 0; i < toggleableLayerIds.length; i++) {
     var layers = document.getElementById('menu');
     layers.appendChild(link);
 }
+
+map.on('click', 'amenity', function (e) {
+        var coordinates = e.features[0].geometry.coordinates.slice();
+        var description = e.features[0].properties.name;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
+    });
 
 </script>
 
