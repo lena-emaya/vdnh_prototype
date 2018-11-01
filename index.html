@@ -84,15 +84,54 @@ map.on('load', () => {
 
    
     map.addLayer({
-        id: "exits",
-        type: "circle",
-        source: "exits",
-        paint: {
-            "circle-radius": 5,
-            "circle-color": 
-                "hsl(311, 86%, 69%)"
+      id: "exits_1",
+      type: "symbol",
+      source: "exits",
+      layout: {
+        "icon-image": "exit_click",
+        "icon-size": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          10,
+          0.3,
+          22,
+          1
+         ],
+        "icon-rotate": [
+          "match",
+          ["get", "id"],
+          [7],
+          215,
+          [2],
+          0,
+          [3],
+          340,
+          [4],
+          30,
+          [5],
+          83,
+          [6],
+          75,
+          [8],
+          318,
+          [9],
+          297,
+          [10],
+          226,
+          [11],
+          8,
+          [12],
+          300,
+          [0, 13],
+          320,
+          [14],
+          250,
+          0
+        ]
+      }, "filter": ["in", "id", ""]
     }
-    });
+    );
 
 
 
@@ -103,11 +142,11 @@ map.on('load', () => {
         paint: {
             
             "fill-color": 
-                "hsl(311, 86%, 69%)",
-            "fill-opacity": 0.3,
+                "#40AFE8",
+            "fill-opacity": 0.25,
         
     },"filter": ["in", "id", ""]
-    });
+    },"building");
 });
 
 
@@ -118,6 +157,7 @@ map.on('click', function(e) {
             return memo;
         }, ['in', 'id']);
         map.setFilter("iso_light", filter);
+        map.setFilter("exits_1", filter);
     });
 
 
