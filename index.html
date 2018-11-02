@@ -1,40 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset='utf-8' />
-    <title>Vdnh_prototupe</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
-    <style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
-        #menu {
-        background: #fff;
-        position: absolute;
-        z-index: 1;
-        top: 10px;
-        left: 10px;
+  <meta charset='utf-8' />
+  <title>Vdnh_prototupe</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+  <style>
+    body { 
+      margin:0; 
+      padding:0;
+    }
         
-        width: 200px;
-        
-        font-family: 'Open Sans', sans-serif;
+    #map { 
+      position:absolute; 
+      top:0; 
+      bottom:0; 
+      width:100%;
+    }
+
+    #menu {
+    background: #fff;
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    left: 10px;
+    width: 200px;
+    font-family: 'Open Sans', sans-serif;
     }
 
     #menu a {
-        font-size: 13px;
-        color: #404040;
-        display: block;
-        margin: 0;
-        padding: 0;
-        padding: 15px;
-        text-decoration: none;
-        border-bottom: solid 0.5px #ccc;
-        text-align: left;
+      font-size: 13px;
+      color: #404040;
+      display: block;
+      margin: 0;
+      padding: 0;
+      padding: 15px;
+      text-decoration: none;
+      border-bottom: solid 0.5px #ccc;
+      text-align: left;
     }
 
     #menu a:last-child {
-        border-bottom: none;
+      border-bottom: none;
     }
 
     #menu a:hover {
@@ -51,16 +59,16 @@
         background: #4A8BE4;
     }
 
-    .mapboxgl-popup {
+    /* .mapboxgl-popup {
         max-width: 400px;
         font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    }
-
+    } */
     </style>
 </head>
 <body>
 <nav id="menu"></nav>
 <div id='map'></div>
+
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoibGVuYWVtYXlhIiwiYSI6ImNpa3VhbXE5ZjAwMXB3eG00ajVyc2J6ZTIifQ.kmZ4yVcNrupl4H8EonM3aQ';
 var map = new mapboxgl.Map({
@@ -289,10 +297,6 @@ map.addLayer({
 });
 
 
-
-
-
-
 map.on('click', function(e) {
         var features = map.queryRenderedFeatures(e.point, { layers: ['exits']});
         var filter = features.reduce(function(memo, feature) {
@@ -307,13 +311,13 @@ map.on('click', function(e) {
 
 
 
- toggleLayer('1', ['strava_all'], 'Спорт летом');
- toggleLayer('2', ['strava'], 'Спорт зимой');
- toggleLayer('3', ['underground-parking', 'underground-parking-pattern'], 'Подземные парковки');
- toggleLayer('4', ['parking'], 'Наземные парковки');
- toggleLayer('5',['foursquare'], 'Данные foursquare');
- toggleLayer('6',['ridership_budni'], 'Пассажиропоток в будни');
- toggleLayer('7',['ridership_ne_budni'], 'Пассажиропоток в выходные');
+toggleLayer('1', ['strava_all'], 'Спорт летом');
+toggleLayer('2', ['strava'], 'Спорт зимой');
+toggleLayer('3', ['underground-parking', 'underground-parking-pattern'], 'Подземные парковки');
+toggleLayer('4', ['parking'], 'Наземные парковки');
+toggleLayer('5',['foursquare'], 'Данные foursquare');
+toggleLayer('6',['ridership_budni'], 'Пассажиропоток в будни');
+toggleLayer('7',['ridership_ne_budni'], 'Пассажиропоток в выходные');
 
  function toggleLayer(id, ids, name) {
         var button = document.createElement('a');
