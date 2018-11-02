@@ -63,10 +63,10 @@
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoibGVuYWVtYXlhIiwiYSI6ImNpa3VhbXE5ZjAwMXB3eG00ajVyc2J6ZTIifQ.kmZ4yVcNrupl4H8EonM3aQ';
 var map = new mapboxgl.Map({
-    container: 'map', // container id
-    style: 'mapbox://styles/lenaemaya/cjnwzrci100a32ro9ukssqg83', // stylesheet location
-    center: [37.642867, 55.834017],
-zoom: 14.0   // starting zoom
+  container: 'map', // container id
+  style: 'mapbox://styles/lenaemaya/cjnwzrci100a32ro9ukssqg83', // stylesheet location
+  center: [37.623516, 55.834373], 
+	zoom: 13.3   // starting zoom
 });
 
 
@@ -161,54 +161,56 @@ map.on('click', function(e) {
     });
 
 
-var toggleableLayerIds = [ 'strava_all', 'strava_winter', 'amenity', 'tourism', 'shops' ];
-
-for (var i = 0; i < toggleableLayerIds.length; i++) {
-    var id = toggleableLayerIds[i];
-
-    var link = document.createElement('a');
-    link.href = '#';
-    link.className = 'active';
-    link.textContent = id;
-
-    link.onclick = function (e) {
-        var clickedLayer = this.textContent;
-        e.preventDefault();
-        e.stopPropagation();
-
-        var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
-
-        if (visibility === 'visible') {
-            map.setLayoutProperty(clickedLayer, 'visibility', 'none');
-            this.className = '';
-        } else {
-            this.className = 'active';
-            map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
-        }
-    };
-
-    var layers = document.getElementById('menu');
-    layers.appendChild(link);
-}
-
-map.on('click', 'amenity', function (e) {
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = e.features[0].properties.amenity;
-
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-
-        new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(map);
-    });
 
 
+ toggleLayer('1', ['strava_all'], 'Перемещения');
+
+ function toggleLayer(id, ids, name) {
+        var button = document.createElement('a');
+        button.textContent = name;
+        //console.log(id);
+        
+        button.onclick = function (e) {
+
+          for (layers in ids) {
+            var visibility = map.getLayoutProperty(ids[layers], 'visibility');
+            if (visibility === 'visible') {
+              map.setLayoutProperty(ids[layers], 'visibility', 'none');
+              this.className = '';
+              
+            } else {
+              this.className = 'active';
+              map.setLayoutProperty(ids[layers], 'visibility', 'visible');
+              
+            }
+          }
+        };
+        var layers = document.getElementById('menu');
+        layers.appendChild(button);
+  };
+ 
+
+// map.on('click', 'amenity', function (e) {
+//   var coordinates = e.features[0].geometry.coordinates.slice();
+//   var description = e.features[0].properties.amenit
+//   while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+//       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+//   }
+
+//   new mapboxgl.Popup()
+//     .setLngLat(coordinates)
+//     .setHTML(description)
+//     .addTo(map);
+// });
+
+map.on('mouseenter', 'exits', function () {
+  map.getCanvas().style.cursor = 'pointer';
+});
+
+   
+map.on('mouseleave', 'exits', function () {
+map.getCanvas().style.cursor = '';
+});
 
 </script>
 
