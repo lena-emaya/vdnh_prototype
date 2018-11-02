@@ -105,6 +105,17 @@ map.addLayer({
   id: "hex",
   type: "fill",
   source: "hex",
+  filter: [
+  "all",
+  [
+    "in",
+    "$type",
+    "Polygon",
+    "LineString",
+    "Point"
+  ],
+  ["all", [">", "population", 12]]
+],
   paint: {
     "fill-color": [ 
                     "step", 
