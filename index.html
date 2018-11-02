@@ -55,18 +55,19 @@
         max-width: 400px;
         font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     }
+
     </style>
 </head>
 <body>
-    <nav id="menu"></nav>
+<nav id="menu"></nav>
 <div id='map'></div>
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoibGVuYWVtYXlhIiwiYSI6ImNpa3VhbXE5ZjAwMXB3eG00ajVyc2J6ZTIifQ.kmZ4yVcNrupl4H8EonM3aQ';
 var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/lenaemaya/cjnwzrci100a32ro9ukssqg83',
-  center: [37.623516, 55.834373], 
-  zoom: 13.3 
+  center: [37.62723840, 55.8291615], 
+  zoom: 12.5 
 });
 
 
@@ -134,19 +135,50 @@ map.addLayer({
 });
 
 
+map.addLayer({
+  id: "iso_light-line",
+  type: "line",
+  source: "iso_exits",
+  paint: {
+    "line-color": [ 
+        "match", 
+        [ 
+            "get", 
+            "time"
+        ], 
+        12, 
+        "#C06C84", 
+        24, 
+        "#F67280", 
+        "#F8B195"
+    ],
+    "line-opacity": 0.6,
+    "line-width": 0.5,
+  },"filter": ["in", "id", ""] 
+});
 
 map.addLayer({
   id: "iso_light",
   type: "fill",
   source: "iso_exits",
   paint: {
-      
-      "fill-color": 
-          "#40AFE8",
-      "fill-opacity": 0.35,
+    "fill-color": 
+      [ 
+        "match", 
+        [ 
+            "get", 
+            "time"
+        ], 
+        12, 
+        "#C06C84", 
+        24, 
+        "#F67280", 
+        "#F8B195"
+    ],
+    "fill-opacity": 0.35,
       
   },"filter": ["in", "id", ""]
-  },"building");
+  },"park_border");
 });
 
 
@@ -161,8 +193,9 @@ map.on('click', function(e) {
             return memo;
         }, ['in', 'id']);
         map.setFilter("iso_light", filter);
+        map.setFilter("iso_light-line", filter);
         map.setFilter("exits_1", filter);
-    });
+});
 
 
 
@@ -171,6 +204,9 @@ map.on('click', function(e) {
  toggleLayer('2', ['strava'], 'Спорт зимой');
  toggleLayer('3', ['underground-parking', 'underground-parking-pattern'], 'Подземные парковки');
  toggleLayer('4', ['parking'], 'Наземные парковки');
+ toggleLayer('5',['foursquare'], 'Данные foursquare');
+ toggleLayer('6',['ridership-budni'], 'Пассажиропоток в будни');
+ toggleLayer('7',['ridership-budni'], 'Пассажиропоток в выходные');
 
  function toggleLayer(id, ids, name) {
         var button = document.createElement('a');
@@ -218,6 +254,8 @@ map.on('mouseenter', 'exits', function () {
 map.on('mouseleave', 'exits', function () {
 map.getCanvas().style.cursor = '';
 });
+
+
 
 </script>
 
