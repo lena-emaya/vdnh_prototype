@@ -14,9 +14,9 @@
         position: absolute;
         z-index: 1;
         top: 10px;
-        right: 10px;
-        border-radius: 3px;
-        width: 120px;
+        left: 10px;
+        
+        width: 200px;
         
         font-family: 'Open Sans', sans-serif;
     }
@@ -27,28 +27,28 @@
         display: block;
         margin: 0;
         padding: 0;
-        padding: 10px;
+        padding: 15px;
         text-decoration: none;
-        
-        text-align: center;
+        border-bottom: solid 0.5px #ccc;
+        text-align: left;
     }
 
     #menu a:last-child {
-        border: none;
+        border-bottom: none;
     }
 
     #menu a:hover {
-        background-color: #f8f8f8;
+        background-color: rgb(160, 198, 252);
         color: #141010;
     }
 
     #menu a.active {
-        background-color: #140D2F;
+        background-color: #196CDD;
         color: #ffffff;
     }
 
     #menu a.active:hover {
-        background: #2C2261;
+        background: #4A8BE4;
     }
 
     .mapboxgl-popup {
@@ -63,91 +63,95 @@
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoibGVuYWVtYXlhIiwiYSI6ImNpa3VhbXE5ZjAwMXB3eG00ajVyc2J6ZTIifQ.kmZ4yVcNrupl4H8EonM3aQ';
 var map = new mapboxgl.Map({
-  container: 'map', // container id
-  style: 'mapbox://styles/lenaemaya/cjnwzrci100a32ro9ukssqg83', // stylesheet location
+  container: 'map',
+  style: 'mapbox://styles/lenaemaya/cjnwzrci100a32ro9ukssqg83',
   center: [37.623516, 55.834373], 
-	zoom: 13.3   // starting zoom
+  zoom: 13.3 
 });
 
 
 map.on('load', () => {
-    map.addSource('exits', {
-        type: 'geojson',
-        data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/exits_vdnh.geojson",
-    });
+  map.addSource('exits', {
+    type: 'geojson',
+    data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/exits_vdnh.geojson",
+  });
 
-    map.addSource('iso_exits', {
-        type: 'geojson',
-        data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/isochrones_big.geojson",
-    });
-    
-
+  map.addSource('iso_exits', {
+    type: 'geojson',
+    data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/isochrones_big.geojson",
+	});
+		
    
-    map.addLayer({
-      id: "exits_1",
-      type: "symbol",
-      source: "exits",
-      layout: {
-        "icon-image": "exit_click",
-        "icon-size": [
-          "interpolate",
-          ["linear"],
-          ["zoom"],
-          10,
-          0.3,
-          22,
-          1
-         ],
-        "icon-rotate": [
-          "match",
-          ["get", "id"],
-          [7],
-          215,
-          [2],
-          0,
-          [3],
-          340,
-          [4],
-          30,
-          [5],
-          83,
-          [6],
-          75,
-          [8],
-          318,
-          [9],
-          297,
-          [10],
-          226,
-          [11],
-          8,
-          [12],
-          300,
-          [0, 13],
-          320,
-          [14],
-          250,
-          0
-        ]
-      }, "filter": ["in", "id", ""]
-    }
-    );
-
-
-
-     map.addLayer({
-        id: "iso_light",
-        type: "fill",
-        source: "iso_exits",
-        paint: {
-            
-            "fill-color": 
-                "#40AFE8",
-            "fill-opacity": 0.25,
-        
-    },"filter": ["in", "id", ""]
-    },"building");
+map.addLayer({
+  id: "exits_1",
+  type: "symbol",
+  source: "exits",
+  layout: {
+    "icon-image": "exit_click",
+    "icon-size": [
+      "interpolate",
+      ["linear"],
+      ["zoom"],
+      10,
+      0.3,
+      22,
+      1
+     ],
+    "icon-rotate": [
+      "match",
+      ["get", "id"],
+      [7],
+      215,
+      [2],
+      0,
+      [3],
+      362,
+      [4],
+      30,
+      [5],
+      83,
+      [6],
+      86,
+      [8],
+      318,
+      [9],
+      297,
+      [10],
+      226,
+      [11],
+      12,
+      [12],
+      308,
+      [13],
+      320,
+      [14],
+      250,
+      [1],
+      14,
+      0
+    ]
+  }, "filter": ["in", "id", ""]
 });
+
+
+
+map.addLayer({
+  id: "iso_light",
+  type: "fill",
+  source: "iso_exits",
+  paint: {
+      
+      "fill-color": 
+          "#40AFE8",
+      "fill-opacity": 0.35,
+      
+  },"filter": ["in", "id", ""]
+  },"building");
+});
+
+
+
+
 
 
 map.on('click', function(e) {
@@ -163,7 +167,10 @@ map.on('click', function(e) {
 
 
 
- toggleLayer('1', ['strava_all'], 'Перемещения');
+ toggleLayer('1', ['strava_all'], 'Спорт летом');
+ toggleLayer('2', ['strava'], 'Спорт зимой');
+ toggleLayer('3', ['underground-parking', 'underground-parking-pattern'], 'Подземные парковки');
+ toggleLayer('4', ['parking'], 'Наземные парковки');
 
  function toggleLayer(id, ids, name) {
         var button = document.createElement('a');
