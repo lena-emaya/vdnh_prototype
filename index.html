@@ -101,149 +101,158 @@ map.on('load', () => {
 	});
     
     
-map.addLayer({
-  id: "hex",
-  type: "fill",
-  source: "hex",
-  filter: [
-  "all",
-  [
-    "in",
-    "$type",
-    "Polygon",
-    "LineString",
-    "Point"
-  ],
-  ["all", [">", "population", 12]]
-],
-  paint: {
-    "fill-color": [ 
-                    "step", 
-                    [ 
-                        "get", 
-                        "population"
-                    ], 
-                     
-                    "hsl(56, 90%, 90%)", 
-                    820, 
-                    "hsl(50, 99%, 81%)", 
-                    1682, 
-                    "hsl(42, 99%, 74%)", 
-                    2760, 
-                    "hsl(37, 100%, 66%)", 
-                    4452, 
-                    "hsl(27, 100%, 59%)", 
-                    7579, 
-                    "hsl(19, 100%, 52%)",
-                  
-                ],
-    "fill-opacity": 0.5,
-    "fill-antialias": false
-  }
-});
-
-
-map.addLayer({
-  id: "ridership_budni",
-  type: "circle",
-  filter: [
-  "all",
-  [
-    "in",
-    "$type",
-    "Polygon",
-    "LineString",
-    "Point"
-  ],
-  [
+  map.addLayer({
+    id: "hex",
+    type: "fill",
+    source: "hex",
+    filter: [
     "all",
-    ["!in", "ridership", 0],
-    ["in", "g_day", 0],
-    ["in", "g_hour", -1]
-  ]
-],
-  source: "ridership",
-  paint: {
-    'circle-color': "#7d7bf4",
-    'circle-opacity': 0.75,
-    'circle-radius': [
-  "interpolate",
-  ["linear"],
-  ["zoom"],
-  10,
-  [
-    "interpolate",
-    ["linear"],
-    ["get", "ridership"],
-    0,
-    3,
-    8079,
-    25
+    [
+      "in",
+      "$type",
+      "Polygon",
+      "LineString",
+      "Point"
+    ],
+    ["all", [">", "population", 12]]
   ],
-  22,
-  [
+    layout: {
+      visibility: "none",
+    },
+    paint: {
+      "fill-color": [ 
+                      "step", 
+                      [ 
+                          "get", 
+                          "population"
+                      ], 
+                       
+                      "hsl(56, 90%, 90%)", 
+                      820, 
+                      "hsl(50, 99%, 81%)", 
+                      1682, 
+                      "hsl(42, 99%, 74%)", 
+                      2760, 
+                      "hsl(37, 100%, 66%)", 
+                      4452, 
+                      "hsl(27, 100%, 59%)", 
+                      7579, 
+                      "hsl(19, 100%, 52%)",
+                    
+                  ],
+      "fill-opacity": 0.5,
+      "fill-antialias": false
+    }
+  });
+
+
+  map.addLayer({
+    id: "ridership_budni",
+    type: "circle",
+    filter: [
+    "all",
+    [
+      "in",
+      "$type",
+      "Polygon",
+      "LineString",
+      "Point"
+    ],
+    [
+      "all",
+      ["!in", "ridership", 0],
+      ["in", "g_day", 0],
+      ["in", "g_hour", -1]
+    ]
+  ],
+    source: "ridership",
+    layout: {
+      visibility: "none",
+    },
+    paint: {
+      'circle-color': "#7d7bf4",
+      'circle-opacity': 0.75,
+      'circle-radius': [
     "interpolate",
     ["linear"],
-    ["get", "ridership"],
-    0,
-    6,
-    8079,
-    45
+    ["zoom"],
+    10,
+    [
+      "interpolate",
+      ["linear"],
+      ["get", "ridership"],
+      0,
+      3,
+      8079,
+      25
+    ],
+    22,
+    [
+      "interpolate",
+      ["linear"],
+      ["get", "ridership"],
+      0,
+      6,
+      8079,
+      45
+    ]
   ]
-]
-  }
-});
+    }
+  });
    
-map.addLayer({
-  id: "ridership_ne_budni",
-  type: "circle",
-  filter: [
-  "all",
-  [
-    "in",
-    "$type",
-    "Polygon",
-    "LineString",
-    "Point"
-  ],
-  [
+  map.addLayer({
+    id: "ridership_ne_budni",
+    type: "circle",
+    filter: [
     "all",
-    ["!in", "ridership", 0],
-    ["in", "g_day", 1],
-    ["in", "g_hour", -1]
-  ]
-],
-  source: "ridership",
-  paint: {
-    'circle-color': "#f47bb2",
-    'circle-opacity': 0.75,
-    'circle-radius': [
-  "interpolate",
-  ["linear"],
-  ["zoom"],
-  10,
-  [
-    "interpolate",
-    ["linear"],
-    ["get", "ridership"],
-    0,
-    3,
-    8079,
-    25
+    [
+      "in",
+      "$type",
+      "Polygon",
+      "LineString",
+      "Point"
+    ],
+    [
+      "all",
+      ["!in", "ridership", 0],
+      ["in", "g_day", 1],
+      ["in", "g_hour", -1]
+    ]
   ],
-  22,
-  [
+    source: "ridership",
+    layout: {
+      visibility: "none",
+    },
+    paint: {
+      'circle-color': "#f47bb2",
+      'circle-opacity': 0.75,
+      'circle-radius': [
     "interpolate",
     ["linear"],
-    ["get", "ridership"],
-    0,
-    6,
-    8079,
-    45
+    ["zoom"],
+    10,
+    [
+      "interpolate",
+      ["linear"],
+      ["get", "ridership"],
+      0,
+      3,
+      8079,
+      25
+    ],
+    22,
+    [
+      "interpolate",
+      ["linear"],
+      ["get", "ridership"],
+      0,
+      6,
+      8079,
+      45
+    ]
   ]
-]
-  }
-});
+    }
+  });
 
 map.addLayer({
   id: "exits_1",
