@@ -90,12 +90,48 @@ map.on('load', () => {
     data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/isochrones_big.geojson",
     });
 
-map.addSource('ridership', {
+  map.addSource('ridership', {
     type: 'geojson',
     data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/ridership_small.geojson",
+  });
+
+  map.addSource('hex', {
+    type: 'geojson',
+    data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/population_hex.geojson",
 	});
     
     
+map.addLayer({
+  id: "hex",
+  type: "fill",
+  source: "hex",
+  paint: {
+    "fill-color": [ 
+                    "step", 
+                    [ 
+                        "get", 
+                        "population"
+                    ], 
+                     
+                    "hsl(56, 90%, 90%)", 
+                    820, 
+                    "hsl(50, 99%, 81%)", 
+                    1682, 
+                    "hsl(42, 99%, 74%)", 
+                    2760, 
+                    "hsl(37, 100%, 66%)", 
+                    4452, 
+                    "hsl(27, 100%, 59%)", 
+                    7579, 
+                    "hsl(19, 100%, 52%)",
+                  
+                ],
+    "fill-opacity": 0.5,
+    "fill-antialias": false
+  }
+});
+
+
 map.addLayer({
   id: "ridership_budni",
   type: "circle",
@@ -297,6 +333,8 @@ map.addLayer({
 });
 
 
+
+
 map.on('click', function(e) {
         var features = map.queryRenderedFeatures(e.point, { layers: ['exits']});
         var filter = features.reduce(function(memo, feature) {
@@ -318,6 +356,7 @@ toggleLayer('4', ['parking'], 'Наземные парковки');
 toggleLayer('5',['foursquare'], 'Данные foursquare');
 toggleLayer('6',['ridership_budni'], 'Пассажиропоток в будни');
 toggleLayer('7',['ridership_ne_budni'], 'Пассажиропоток в выходные');
+toggleLayer('8',['hex'], 'Население');
 
  function toggleLayer(id, ids, name) {
         var button = document.createElement('a');
