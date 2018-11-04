@@ -116,8 +116,8 @@ map.on('load', () => {
       visibility: "none",
     },
     paint: {
-      'fill-color': '#548FFF',
-      'fill-opacity': 0.05,
+      'fill-color': '#F67280',
+      'fill-opacity': 0.045,
       'fill-antialias': false
     }
   },'park-border-2');
@@ -158,11 +158,11 @@ map.on('load', () => {
     source: 'hole',
     layout: {
       visibility: "none",
+      'line-join': 'round'
     },
     paint: {
-      'line-color': '#548FFF',
-      'line-width': 3,
-      'line-blur': 0.15
+      'line-color': '#F67280',
+      'line-width': 3
       
     }
   },'park-border-2');
@@ -176,11 +176,11 @@ map.on('load', () => {
     source: 'hole',
     layout: {
       visibility: "none",
+      'line-join': 'round'
     },
     paint: {
-      'line-color': '#fff',
-      'line-width': 1,
-      'line-dasharray': [1, 1]
+      'line-color': 'rgba(255,255,255,1)',
+      'line-width': 0.5
     }
   },'park-border-2');
 
