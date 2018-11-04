@@ -76,7 +76,8 @@ var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/lenaemaya/cjnwzrci100a32ro9ukssqg83',
   center: [37.62723840, 55.8291615], 
-  zoom: 12.5 
+  zoom: 12.5,
+  minZoom: 12
 });
 
 
@@ -411,8 +412,8 @@ map.on('click', function(e) {
 
 toggleLayer('1', ['strava_all'], 'Спорт летом');
 toggleLayer('2', ['strava_winter'], 'Спорт зимой');
-toggleLayer('3', ['underground-parking', 'underground-parking-pattern'], 'Подземные парковки');
-toggleLayer('4', ['parking'], 'Наземные парковки');
+toggleLayer('3', ['underground-parking', 'underground-parking-pattern','parking', 'parking-point', 'parking-point-2' ], 'Парковки');
+// toggleLayer('4', ['parking'], 'Наземные парковки');
 toggleLayer('5',['foursquare'], 'Данные foursquare');
 toggleLayer('6',['ridership_budni'], 'Пассажиропоток в будни');
 toggleLayer('7',['ridership_ne_budni'], 'Пассажиропоток в выходные');
