@@ -108,7 +108,7 @@ map.on('load', () => {
     data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/isochrone_hole.geojson",
   });
   
-  map.addSource('metro_pass', {
+  map.addSource('metro', {
     type: 'geojson',
     data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/metro_pass.geojson",
 	});
@@ -156,7 +156,17 @@ map.on('load', () => {
   },'park-border-2');
 
 
-
+  map.addLayer({
+    id: 'metro_pass',
+    type: "circle",
+    source: 'metro',
+    
+    paint: {
+      'circle-color': "#000",
+      
+      'circle-radius': 8
+    }
+  });
   
   map.addLayer({
     id: 'hole2',
@@ -298,19 +308,7 @@ map.on('load', () => {
     }
   });
 
-  map.addLayer({
-    id: "metro_pass",
-    type: "circle",
-    source: "metro_pass",
-    // layout: {
-    //   visibility: "none",
-    // },
-    paint: {
-      'circle-color': "#F16660",
-      'circle-opacity': 0.75,
-      'circle-radius': 8
-    }
-  });
+
 
 map.addLayer({
   id: "exits_1",
