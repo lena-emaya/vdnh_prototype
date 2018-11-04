@@ -6,6 +6,7 @@
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+  <script src="https://unpkg.com/supercluster@4.1.1/dist/supercluster.min.js"></script>
   <style>
     body { 
       margin:0; 
@@ -77,6 +78,7 @@ var map = new mapboxgl.Map({
   center: [37.62723840, 55.8291615], 
   zoom: 12.5 
 });
+
 
 
 map.on('load', () => {
@@ -369,8 +371,10 @@ map.on('click', function(e) {
 
 
 
+
+
 toggleLayer('1', ['strava_all'], 'Спорт летом');
-toggleLayer('2', ['strava'], 'Спорт зимой');
+toggleLayer('2', ['strava_winter'], 'Спорт зимой');
 toggleLayer('3', ['underground-parking', 'underground-parking-pattern'], 'Подземные парковки');
 toggleLayer('4', ['parking'], 'Наземные парковки');
 toggleLayer('5',['foursquare'], 'Данные foursquare');
