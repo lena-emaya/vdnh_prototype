@@ -365,7 +365,7 @@ map.addLayer({
     "line-opacity": 0.6,
     "line-width": 0.5,
   },"filter": ["in", "id", ""] 
-});
+},'foursquare');
 
 map.addLayer({
   id: "iso_light",
@@ -388,7 +388,7 @@ map.addLayer({
     "fill-opacity": 0.35,
       
   },"filter": ["in", "id", ""]
-  },"park-border");
+  },'foursquare');
 });
 
 
@@ -412,12 +412,13 @@ map.on('click', function(e) {
 
 toggleLayer('1', ['strava_all'], 'Спорт летом');
 toggleLayer('2', ['strava_winter'], 'Спорт зимой');
-toggleLayer('3', ['underground-parking', 'underground-parking-pattern','parking', 'parking-point', 'parking-point-2' ], 'Парковки');
-// toggleLayer('4', ['parking'], 'Наземные парковки');
+toggleLayer('3', ['underground-parking', 'underground-parking-pattern','parking', 'parking-point-2' ], 'Парковки');
+toggleLayer('4', ['ngpt-stops'], 'Остановки НГПТ');
 toggleLayer('5',['foursquare'], 'Данные foursquare');
 toggleLayer('6',['ridership_budni'], 'Пассажиропоток в будни');
 toggleLayer('7',['ridership_ne_budni'], 'Пассажиропоток в выходные');
-toggleLayer('8', ['hole', 'hole2', 'hole3', 'population'], 'Население в 30минутной изохроне')
+toggleLayer('9',['poi-all-1'], 'POI');
+toggleLayer('8', ['hole', 'hole2', 'hole3', 'population'], 'Население в 30минутной изохроне');
 
 
  function toggleLayer(id, ids, name) {
