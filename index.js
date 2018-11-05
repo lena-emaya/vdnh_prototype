@@ -21,15 +21,10 @@ map.on('load', () => {
     data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/isochrones_big.geojson",
   });
 
-  // map.addSource('iso_24', {
-  //   type: 'geojson',
-  //   data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/isochrones_24.geojson",
-  // });
-
-  // map.addSource('iso_36', {
-  //   type: 'geojson',
-  //   data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/isochrones_36.geojson",
-  // });
+  map.addSource('otp', {
+    type: 'geojson',
+    data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/otp_30_min.geojson",
+  });
 
   map.addSource('ridership', {
     type: 'geojson',
@@ -460,7 +455,71 @@ map.addLayer({
   }, "filter": ["in", "id", ""]
 },'road-construction');
 
+map.addLayer({
+  id: "otp",
+  type: "fill",
+  source: "otp",
+  layout: {
+    visibility: 'none'
+  },
+  paint: {
+    'fill-color': '#A6A8F7',
+    'fill-opacity': 0.05,
+    'fill-antialias': false
+  }
+}, "foursquare");
+
+map.addLayer({
+  id: 'otp2',
+  type: 'line',
+  source: 'otp',
+  layout: {
+    visibility: "none",
+    'line-join': 'round'
+  },
+  paint: {
+    'line-color': '#A6A8F7',
+    'line-width': 5,
+    'line-blur': 2
+  }
+},'foursquare');
+
+map.addLayer({
+  id: 'otp4',
+  type: 'line',
+  source: 'otp',
+  layout: {
+    visibility: "none",
+    'line-join': 'round'
+  },
+  paint: {
+    'line-color': '#A6A8F7',
+    'line-width': 3
+    
+  }
+},'foursquare');
+
+
+
+
+map.addLayer({
+  id: 'otp-line',
+  type: 'line',
+  source: 'otp',
+  layout: {
+    visibility: "none",
+    'line-join': 'round'
+  },
+  paint: {
+    'line-color': 'rgba(255,255,255,1)',
+    'line-width': 1,
+    'line-dasharray': [1,1]
+  }
+},'foursquare');
+
 });
+
+
 
 
 
@@ -491,6 +550,7 @@ toggleLayer('6',['ridership_budni'], 'Пассажиропоток в будни
 toggleLayer('7',['ridership_ne_budni'], 'Пассажиропоток в выходные');
 toggleLayer('10',['metro_pass'], 'Пассажиропотоки метро');
 toggleLayer('5',['foursquare'], 'Данные foursquare');
+toggleLayer('11', ['otp', 'otp2', 'otp4', 'otp-line'], 'Изохрона 30минут на общественном транспорте');
 toggleLayer('9',['poi-all-1', 'poi-all-2'], 'POI');
 toggleLayer('1', ['strava_all'], 'Спорт летом');
 toggleLayer('2', ['strava_winter'], 'Спорт зимой');
