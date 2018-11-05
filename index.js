@@ -492,11 +492,15 @@ toggleLayer('2', ['strava_winter'], 'Спорт зимой');
 
 map.on('click', 'poi-all-1', function (e) {
   var coordinates = e.features[0].geometry.coordinates.slice();
-  var description = e.features[0].properties.type
+
+  if (e.features[0].properties.name === undefined || e.features[0].properties.name === null) {
+    var description =e.features[0].properties.type
+  } else {
+    var description =e.features[0].properties.name
+  }
   while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
   }
-
   new mapboxgl.Popup()
     .setLngLat(coordinates)
     .setHTML(description)
