@@ -26,6 +26,11 @@ map.on('load', () => {
     data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/otp_30_min.geojson",
   });
 
+  map.addSource('galton', {
+    type: 'geojson',
+    data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/galton_great_20.geojson",
+  });
+
   map.addSource('ridership', {
     type: 'geojson',
     data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/ridership_small.geojson",
@@ -456,6 +461,70 @@ map.addLayer({
 },'road-construction');
 
 map.addLayer({
+  id: "galton",
+  type: "fill",
+  source: "galton",
+  layout: {
+    visibility: 'none'
+  },
+  paint: {
+    'fill-color': '#78C7FF',
+    'fill-opacity': 0.1,
+    'fill-antialias': false
+  }
+}, "foursquare");
+
+map.addLayer({
+  id: 'galton2',
+  type: 'line',
+  source: 'galton',
+  layout: {
+    visibility: "none",
+    'line-join': 'round'
+  },
+  paint: {
+    'line-color': '#78C7FF',
+    'line-width': 5,
+    'line-blur': 2
+  }
+},'foursquare');
+
+map.addLayer({
+  id: 'galton4',
+  type: 'line',
+  source: 'galton',
+  layout: {
+    visibility: "none",
+    'line-join': 'round'
+  },
+  paint: {
+    'line-color': '#78C7FF',
+    'line-width': 3
+    
+  }
+},'foursquare');
+
+
+
+
+map.addLayer({
+  id: 'galton-line',
+  type: 'line',
+  source: 'galton',
+  layout: {
+    visibility: "none",
+    'line-join': 'round'
+  },
+  paint: {
+    'line-color': 'rgba(255,255,255,1)',
+    'line-width': 1,
+    'line-dasharray': [1,1]
+  }
+},'foursquare');
+
+
+
+map.addLayer({
   id: "otp",
   type: "fill",
   source: "otp",
@@ -549,7 +618,7 @@ toggleLayer('3', ['underground-parking', 'underground-parking-pattern','vdnh-par
 toggleLayer('6',['ridership_budni'], 'Пассажиропоток в будни');
 toggleLayer('7',['ridership_ne_budni'], 'Пассажиропоток в выходные');
 toggleLayer('10',['metro_pass'], 'Пассажиропотоки метро');
-toggleLayer('11', ['otp', 'otp2', 'otp4', 'otp-line'], 'Изохрона 30минут на общественном транспорте');
+toggleLayer('11', ['otp', 'otp2', 'otp4', 'otp-line', 'galton', 'galton2', 'galton4', 'galton-line',], 'Изохрона 30 минут ОТ/Авто');
 toggleLayer('5',['foursquare'], 'Данные foursquare');
 //toggleLayer('12', ['foursquare-points'], 'POI Foursquare')
 toggleLayer('9',['poi-all-1'], 'POI');
