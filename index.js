@@ -5,7 +5,7 @@ var map = new mapboxgl.Map({
   style: 'mapbox://styles/lenaemaya/cjnwzrci100a32ro9ukssqg83',
   center: [37.62723840, 55.8291615], 
   zoom: 13,
-  minZoom: 12
+  minZoom: 9
 });
 
 
@@ -168,33 +168,48 @@ map.on('load', () => {
       visibility: "none",
     },
     paint: {
-      'circle-color': "#7d7bf4",
-      'circle-opacity': 0.75,
+      "circle-color" : "#5D2BE3",
+      "circle-opacity": 0.4,
+      "circle-stroke-color" : "#5D2BE3",
+      "circle-stroke-opacity": 0.5,
+      "circle-stroke-width" : [ 
+          "interpolate", 
+          [ 
+              "linear"
+          ], 
+          [ 
+              "zoom"
+          ], 
+          10, 
+          0.1, 
+          14, 
+          0.5
+      ],
       'circle-radius': [
-    "interpolate",
-    ["linear"],
-    ["zoom"],
-    10,
-    [
-      "interpolate",
-      ["linear"],
-      ["get", "ridership"],
-      0,
-      3,
-      8079,
-      25
-    ],
-    22,
-    [
-      "interpolate",
-      ["linear"],
-      ["get", "ridership"],
-      0,
-      6,
-      8079,
-      45
-    ]
-  ]
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        10,
+        [
+          "interpolate",
+          ["linear"],
+          ["get", "ridership"],
+          0,
+          3,
+          8079,
+          25
+        ],
+        22,
+        [
+          "interpolate",
+          ["linear"],
+          ["get", "ridership"],
+          0,
+          6,
+          8079,
+          45
+        ]
+      ]
     }
   });
    
@@ -222,33 +237,48 @@ map.on('load', () => {
       visibility: "none",
     },
     paint: {
-      'circle-color': "#f47bb2",
-      'circle-opacity': 0.75,
+      "circle-color" : "#39E9F7",
+      "circle-stroke-color" : "#39E9F7",
+      "circle-stroke-opacity": 0.5,
+      "circle-stroke-width" : [ 
+          "interpolate", 
+          [ 
+              "linear"
+          ], 
+          [ 
+              "zoom"
+          ], 
+          10, 
+          0.2, 
+          14, 
+          0.7
+      ],
+      'circle-opacity': 0.6,
       'circle-radius': [
-    "interpolate",
-    ["linear"],
-    ["zoom"],
-    10,
-    [
-      "interpolate",
-      ["linear"],
-      ["get", "ridership"],
-      0,
-      3,
-      8079,
-      25
-    ],
-    22,
-    [
-      "interpolate",
-      ["linear"],
-      ["get", "ridership"],
-      0,
-      6,
-      8079,
-      45
-    ]
-  ]
+        "interpolate",
+        ["linear"],
+        ["zoom"],
+        10,
+        [
+          "interpolate",
+          ["linear"],
+          ["get", "ridership"],
+          0,
+          3,
+          8079,
+          25
+        ],
+        22,
+        [
+          "interpolate",
+          ["linear"],
+          ["get", "ridership"],
+          0,
+          6,
+          8079,
+          45
+        ]
+      ]
     }
   });
 
