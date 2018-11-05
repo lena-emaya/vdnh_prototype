@@ -28,7 +28,7 @@ map.on('load', () => {
 
   map.addSource('house', {
     type: 'geojson',
-    data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/house_pop.geojson",
+    data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/house_population.geojson",
   });
   
   map.addSource('hole', {
@@ -50,8 +50,8 @@ map.on('load', () => {
       visibility: "none",
     },
     paint: {
-      'fill-color': '#F67280',
-      'fill-opacity': 0.045,
+      'fill-color': '#548FFF',
+      'fill-opacity': 0.05,
       'fill-antialias': false
     }
   },'park-border-2');
@@ -71,13 +71,13 @@ map.on('load', () => {
                         "sumpopulat"
                     ], 
                     "#ffc34d", 
-                    14, 
+                    11, 
                     "#ff4916", 
-                    35, 
+                    23, 
                     "#de0032", 
-                    73, 
+                    49, 
                     "#a70070", 
-                    135, 
+                    146, 
                     "#630070"
                 ]
     }
@@ -95,7 +95,22 @@ map.on('load', () => {
       'line-join': 'round'
     },
     paint: {
-      'line-color': '#F67280',
+      'line-color': '#7AABFF',
+      'line-width': 5,
+      'line-blur': 2
+    }
+  },'park-border-2');
+
+  map.addLayer({
+    id: 'hole4',
+    type: 'line',
+    source: 'hole',
+    layout: {
+      visibility: "none",
+      'line-join': 'round'
+    },
+    paint: {
+      'line-color': '#548FFF',
       'line-width': 3
       
     }
@@ -114,7 +129,8 @@ map.on('load', () => {
     },
     paint: {
       'line-color': 'rgba(255,255,255,1)',
-      'line-width': 0.5
+      'line-width': 1,
+      'line-dasharray': [1,1]
     }
   },'park-border-2');
 
@@ -329,20 +345,34 @@ map.addLayer({
             "time"
         ], 
         12, 
-        "#C06C84", 
+        "#A3435D", 
         24, 
         "#F67280", 
         "#F8B195"
     ],
-    "line-opacity": 0.6,
-    "line-width": 0.5,
+    "line-opacity": 1,
+    "line-width": 1,
   },"filter": ["in", "id", ""] 
-},'foursquare');
+},'road-construction');
 
 map.addLayer({
   id: "iso_light",
   type: "fill",
   source: "iso_exits",
+  filter: [
+    "all",
+    [
+      "in",
+      "$type",
+      "Polygon",
+      "LineString",
+      "Point"
+    ],
+    ["all", 
+    ["in", "time", 12]
+    
+    ]
+  ],
   paint: {
     "fill-color": 
       [ 
@@ -351,16 +381,18 @@ map.addLayer({
             "get", 
             "time"
         ], 
-        12, 
-        "#C06C84", 
+        36, 
+        "#F8B195", 
         24, 
-        "#F67280", 
-        "#F8B195"
+        "#F67280",
+        12,
+        "#A3435D",
+        "rgba(0, 0, 0, 0)"
     ],
-    "fill-opacity": 0.35,
+    "fill-opacity": 1,
       
-  },"filter": ["in", "id", ""]
-  },'foursquare');
+  }, filter: ["in", "id", ""]
+  },'road-construction');
 });
 
 
@@ -382,7 +414,7 @@ map.on('click', function(e) {
 
 
 
-toggleLayer('8', ['hole', 'hole2', 'hole3', 'population'], 'Население в 30минутной изохроне');
+toggleLayer('8', ['hole', 'hole2', 'hole3','hole4', 'population'], 'Население в 30минутной изохроне');
 toggleLayer('4', ['ngpt-stops'], 'Остановки НГПТ');
 toggleLayer('3', ['underground-parking', 'underground-parking-pattern','parking', 'parking-point-2', 'parking-line-symbol' ], 'Парковки');
 toggleLayer('6',['ridership_budni'], 'Пассажиропоток в будни');
