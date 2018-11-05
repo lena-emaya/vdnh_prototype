@@ -453,7 +453,7 @@ map.on('click', function(e) {
 
 toggleLayer('8', ['hole', 'hole2', 'hole3','hole4', 'population'], 'Население в 30минутной изохроне');
 toggleLayer('4', ['ngpt-stops'], 'Остановки НГПТ');
-toggleLayer('3', ['underground-parking', 'underground-parking-pattern','parking', 'parking-point-2', 'parking-line-symbol' ], 'Парковки');
+toggleLayer('3', ['underground-parking', 'underground-parking-pattern','vdnh-parking', 'vdnh-parking-pattern','parking', 'parking-points', 'parking-cetroids' ], 'Парковки');
 toggleLayer('6',['ridership_budni'], 'Пассажиропоток в будни');
 toggleLayer('7',['ridership_ne_budni'], 'Пассажиропоток в выходные');
 toggleLayer('10',['metro_pass'], 'Пассажиропотоки метро');
