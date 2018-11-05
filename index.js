@@ -16,10 +16,20 @@ map.on('load', () => {
     data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/exits_vdnh.geojson",
   });
 
-  map.addSource('iso_exits', {
+  map.addSource('isochrones', {
     type: 'geojson',
     data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/isochrones_big.geojson",
-    });
+  });
+
+  // map.addSource('iso_24', {
+  //   type: 'geojson',
+  //   data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/isochrones_24.geojson",
+  // });
+
+  // map.addSource('iso_36', {
+  //   type: 'geojson',
+  //   data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/isochrones_36.geojson",
+  // });
 
   map.addSource('ridership', {
     type: 'geojson',
@@ -334,9 +344,9 @@ map.addLayer({
 
 
 map.addLayer({
-  id: "iso_light-line",
+  id: "iso_line",
   type: "line",
-  source: "iso_exits",
+  source: "isochrones",
   paint: {
     "line-color": [ 
         "match", 
@@ -345,68 +355,95 @@ map.addLayer({
             "time"
         ], 
         12, 
-        "#A3435D", 
+        "#C91C33", 
         24, 
-        "#F67280", 
-        "#F8B195"
+        "#FF5252", 
+        "#FFAB38"
     ],
-    "line-opacity": 1,
+    "line-opacity": 0.5,
     "line-width": 1,
   },"filter": ["in", "id", ""] 
 },'road-construction');
 
 map.addLayer({
-  id: "iso_light",
+  id: "iso_36",
   type: "fill",
-  source: "iso_exits",
-  filter: [
-    "all",
-    [
-      "in",
-      "$type",
-      "Polygon",
-      "LineString",
-      "Point"
-    ],
-    ["all", 
-    ["in", "time", 12]
-    
-    ]
-  ],
+  source: "isochrones",
   paint: {
-    "fill-color": 
-      [ 
+    "fill-color":[  
+            "match", 
+            [ 
+                "get", 
+                "time"
+            ], 
+            12, 
+            "rgba(0,0,0,0)", 
+            24, 
+            "rgba(0,0,0,0)", 
+            "#FFAB38"
+        ],
+    "fill-opacity": 0.35
+  }, "filter": ["in", "id", ""]
+},'road-construction');
+
+map.addLayer({
+  id: "iso_24",
+  type: "fill",
+  source: "isochrones",
+  paint: {
+    "fill-color":[  
+            "match", 
+            [ 
+                "get", 
+                "time"
+            ], 
+            12, 
+            "rgba(0,0,0,0)", 
+            24, 
+            "#FF5252", 
+            "rgba(0,0,0,0)"
+        ],
+    "fill-opacity": 0.35
+  }, "filter": ["in", "id", ""]
+},'road-construction');
+
+map.addLayer({
+  id: "iso_12",
+  type: "fill",
+  source: "isochrones",
+  paint: {
+    "fill-color":[  
         "match", 
         [ 
             "get", 
             "time"
         ], 
-        36, 
-        "#F8B195", 
+        12, 
+        "#C91C33", 
         24, 
-        "#F67280",
-        12,
-        "#A3435D",
-        "rgba(0, 0, 0, 0)"
-    ],
-    "fill-opacity": 1,
-      
-  }, filter: ["in", "id", ""]
-  },'road-construction');
+        "rgba(0,0,0,0)", 
+        "rgba(0,0,0,0)"
+      ],
+    "fill-opacity": 0.35
+  }, "filter": ["in", "id", ""]
+},'road-construction');
+
 });
 
 
 
 
 map.on('click', function(e) {
-        var features = map.queryRenderedFeatures(e.point, { layers: ['exits']});
-        var filter = features.reduce(function(memo, feature) {
-            memo.push(feature.properties.id);
-            return memo;
-        }, ['in', 'id']);
-        map.setFilter("iso_light", filter);
-        map.setFilter("iso_light-line", filter);
-        map.setFilter("exits_1", filter);
+  var features = map.queryRenderedFeatures(e.point, { layers: ['exits']});
+  var filter = features.reduce(function(memo, feature) {
+    memo.push(feature.properties.id);
+    return memo;
+  }, ['in', 'id']);
+  map.setFilter("iso_12", filter);
+  map.setFilter("iso_24", filter);
+  map.setFilter("iso_36", filter);
+  map.setFilter("iso_line", filter);
+  map.setFilter("exits_1", filter);
 });
 
 
@@ -483,5 +520,3 @@ map.on('mouseenter', 'poi-all-1', function () {
 map.on('mouseleave', 'poi-all-1', function () {
 map.getCanvas().style.cursor = '';
 });
-
-
