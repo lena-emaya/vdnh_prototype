@@ -409,7 +409,7 @@ map.addLayer({
             "rgba(0,0,0,0)", 
             "#FFAB38"
         ],
-    "fill-opacity": 0.35
+    "fill-opacity": 0.3
   }, "filter": ["in", "id", ""]
 },'road-construction');
 
@@ -430,7 +430,7 @@ map.addLayer({
             "#FF5252", 
             "rgba(0,0,0,0)"
         ],
-    "fill-opacity": 0.35
+    "fill-opacity": 0.3
   }, "filter": ["in", "id", ""]
 },'road-construction');
 
@@ -451,7 +451,7 @@ map.addLayer({
         "rgba(0,0,0,0)", 
         "rgba(0,0,0,0)"
       ],
-    "fill-opacity": 0.35
+    "fill-opacity": 0.3
   }, "filter": ["in", "id", ""]
 },'road-construction');
 
@@ -464,7 +464,7 @@ map.addLayer({
   },
   paint: {
     'fill-color': '#A6A8F7',
-    'fill-opacity': 0.05,
+    'fill-opacity': 0.1,
     'fill-antialias': false
   }
 }, "foursquare");
@@ -549,9 +549,10 @@ toggleLayer('3', ['underground-parking', 'underground-parking-pattern','vdnh-par
 toggleLayer('6',['ridership_budni'], 'Пассажиропоток в будни');
 toggleLayer('7',['ridership_ne_budni'], 'Пассажиропоток в выходные');
 toggleLayer('10',['metro_pass'], 'Пассажиропотоки метро');
-toggleLayer('5',['foursquare'], 'Данные foursquare');
 toggleLayer('11', ['otp', 'otp2', 'otp4', 'otp-line'], 'Изохрона 30минут на общественном транспорте');
-toggleLayer('9',['poi-all-1', 'poi-all-2'], 'POI');
+toggleLayer('5',['foursquare'], 'Данные foursquare');
+//toggleLayer('12', ['foursquare-points'], 'POI Foursquare')
+toggleLayer('9',['poi-all-1'], 'POI');
 toggleLayer('1', ['strava_all'], 'Спорт летом');
 toggleLayer('2', ['strava_winter'], 'Спорт зимой');
 
