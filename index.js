@@ -615,9 +615,9 @@ map.on('click', function(e) {
 toggleLayer('8', ['hole', 'hole2', 'hole3','hole4', 'population'], 'Население в 30минутной изохроне');
 toggleLayer('4', ['ngpt-stops'], 'Остановки НГПТ');
 toggleLayer('3', ['underground-parking', 'underground-parking-pattern','vdnh-parking', 'vdnh-parking-pattern','parking', 'parking-points', 'parking-centroids' ], 'Парковки');
-toggleLayer('6',['ridership_budni'], 'Пассажиропоток в будни');
-toggleLayer('7',['ridership_ne_budni'], 'Пассажиропоток в выходные');
-toggleLayer('10',['metro_pass'], 'Пассажиропотоки метро');
+// toggleLayer('6',['ridership_budni'], 'Пассажиропоток в будни');
+// toggleLayer('7',['ridership_ne_budni'], 'Пассажиропоток в выходные');
+// toggleLayer('10',['metro_pass'], 'Пассажиропотоки метро');
 toggleLayer('11', ['otp', 'otp2', 'otp4', 'otp-line', 'galton', 'galton2', 'galton4', 'galton-line',], 'Изохрона 30 минут ОТ/Авто');
 toggleLayer('5',['foursquare'], 'Данные foursquare');
 //toggleLayer('12', ['foursquare-points'], 'POI Foursquare')
