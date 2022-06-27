@@ -8,8 +8,6 @@ var map = new mapboxgl.Map({
   minZoom: 9
 });
 
-
-
 map.on('load', () => {
   map.addSource('exits', {
     type: 'geojson',
@@ -51,7 +49,6 @@ map.on('load', () => {
     data: "https://raw.githubusercontent.com/lena-emaya/vdnh_prototype/master/data/metro_pass.geojson",
 	});
     
-
   map.addLayer({
     id: 'hole3',
     type: 'fill',
@@ -93,9 +90,6 @@ map.on('load', () => {
     }
   },'park-border-2');
 
-
-  
-  
   map.addLayer({
     id: 'hole2',
     type: 'line',
@@ -125,9 +119,6 @@ map.on('load', () => {
       
     }
   },'park-border-2');
-
-
-
 
   map.addLayer({
     id: 'hole',
@@ -372,9 +363,6 @@ map.addLayer({
   }, "filter": ["in", "id", ""]
 });
 
-
-
-
 map.addLayer({
   id: "iso_line",
   type: "line",
@@ -504,9 +492,6 @@ map.addLayer({
   }
 },'foursquare');
 
-
-
-
 map.addLayer({
   id: 'galton-line',
   type: 'line',
@@ -521,8 +506,6 @@ map.addLayer({
     'line-dasharray': [1,1]
   }
 },'foursquare');
-
-
 
 map.addLayer({
   id: "otp",
@@ -588,11 +571,6 @@ map.addLayer({
 
 });
 
-
-
-
-
-
 map.on('click', function(e) {
   var features = map.queryRenderedFeatures(e.point, { layers: ['exits']});
   var filter = features.reduce(function(memo, feature) {
@@ -608,30 +586,23 @@ map.on('click', function(e) {
 });
 
 
-
-
-
-
-toggleLayer('8', ['hole', 'hole2', 'hole3','hole4', 'population'], 'Население в 30минутной изохроне');
-toggleLayer('4', ['ngpt-stops'], 'Остановки НГПТ');
-toggleLayer('3', ['underground-parking', 'underground-parking-pattern','vdnh-parking', 'vdnh-parking-pattern','parking', 'parking-points', 'parking-centroids' ], 'Парковки');
+toggleLayer('8', ['hole', 'hole2', 'hole3','hole4', 'population'], 'Population in 30 minutes isochrone');
+toggleLayer('4', ['ngpt-stops'], 'Public transport');
+toggleLayer('3', ['underground-parking', 'underground-parking-pattern','vdnh-parking', 'vdnh-parking-pattern','parking', 'parking-points', 'parking-centroids' ], 'Parking');
 // toggleLayer('6',['ridership_budni'], 'Пассажиропоток в будни');
 // toggleLayer('7',['ridership_ne_budni'], 'Пассажиропоток в выходные');
 // toggleLayer('10',['metro_pass'], 'Пассажиропотоки метро');
-toggleLayer('11', ['otp', 'otp2', 'otp4', 'otp-line', 'galton', 'galton2', 'galton4', 'galton-line',], 'Изохрона 30 минут ОТ/Авто');
-toggleLayer('5',['foursquare'], 'Данные foursquare');
+toggleLayer('11', ['otp', 'otp2', 'otp4', 'otp-line', 'galton', 'galton2', 'galton4', 'galton-line',], '30 minutes isochrone transport / car');
+toggleLayer('5',['foursquare'], 'Foursquare data');
 //toggleLayer('12', ['foursquare-points'], 'POI Foursquare')
 toggleLayer('9',['poi-all-1'], 'POI');
-toggleLayer('1', ['strava_all'], 'Спорт летом');
-toggleLayer('2', ['strava_winter'], 'Спорт зимой');
-
-
+toggleLayer('1', ['strava_all'], 'Sport in summer');
+toggleLayer('2', ['strava_winter'], 'Sport in winter');
 
 
  function toggleLayer(id, ids, name) {
         var button = document.createElement('a');
         button.textContent = name;
-        //console.log(id);
         
         button.onclick = function (e) {
 
@@ -673,8 +644,7 @@ map.on('click', 'poi-all-1', function (e) {
 map.on('mouseenter', 'exits', function () {
   map.getCanvas().style.cursor = 'pointer';
 });
-
-   
+  
 map.on('mouseleave', 'exits', function () {
 map.getCanvas().style.cursor = '';
 });
@@ -682,8 +652,7 @@ map.getCanvas().style.cursor = '';
 map.on('mouseenter', 'poi-all-1', function () {
   map.getCanvas().style.cursor = 'pointer';
 });
-
-   
+ 
 map.on('mouseleave', 'poi-all-1', function () {
 map.getCanvas().style.cursor = '';
 });
